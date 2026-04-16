@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { getPatients } from "../controllers/patientController.js";
+import { addPatient, getPatients, getPatientsByName } from "../controllers/patientController.js";
 
 const router = Router();
 
-router.route('/getdata').get(getPatients);
+router.route('/addpatient').post(addPatient);
+router.route('/getpatients').get(getPatients);
+router.route('/getpatientsbyname').get(getPatientsByName);
 
 export default router;

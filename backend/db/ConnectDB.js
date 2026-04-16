@@ -1,5 +1,6 @@
 import { configDotenv } from "dotenv";
 import { Pool } from "pg"
+import initDB from "./initDB.js";
 configDotenv();
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -9,7 +10,8 @@ const pool = new Pool({
     port: process.env.DB_PORT,
 })
 
-pool.on('connect', () => {
+
+pool.on('connect', async () => {
     console.log('Connected to the database');
 })
 
