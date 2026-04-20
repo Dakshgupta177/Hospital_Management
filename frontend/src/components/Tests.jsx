@@ -108,7 +108,7 @@ function Tests() {
 
                   <button
                     onClick={() => togglePaid(test.id)}
-                    className={`mt-1 text-xs bg-blue-500 text-white px-2 py-1 rounded ${test.status === "Paid" ? "hidden" : ""}`}
+                    className={`mt-1 text-xs bg-blue-500 cursor-pointer text-white px-2 py-1 rounded ${test.status === "Paid" ? "hidden" : ""}`}
                   >
                     Pay
                   </button>

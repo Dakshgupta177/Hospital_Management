@@ -71,7 +71,7 @@ export const searchForDoctors = async (req, res) => {
   try {
     const { search } = req.query;
     const result = await pool.query(
-      "SELECT d.id, d.first_name, d.last_name, dep.name AS department FROM doctors d JOIN departments dep ON d.dept_id = dep.id WHERE dep.name ILIKE $1 OR d.first_name ILIKE $1 OR d.last_name ILIKE $1;",
+      "SELECT d.id, d.first_name, d.last_name, dep.name AS department, d.experience, d.dob, d.salary FROM doctors d JOIN departments dep ON d.dept_id = dep.id WHERE dep.name ILIKE $1 OR d.first_name ILIKE $1 OR d.last_name ILIKE $1;",
       [`%${search}%`],
     );
     return res.status(200).json(result.rows);
