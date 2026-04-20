@@ -5,9 +5,13 @@ configDotenv();
 const app = express();
 
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
-  optionsSuccessStatus: 200
-}
+  origin: [
+    'https://hospital-management-1-uvx8.onrender.com',
+    'https://hospital-management-1-uvx8.onrender.com/'
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+};
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
