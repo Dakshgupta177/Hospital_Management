@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Pencil, Trash2, Plus } from "lucide-react";
+import { getApiUrl } from "../api/api";
 
 function Patients() {
   const [search, setSearch] = useState("");
@@ -35,7 +36,7 @@ function Patients() {
   const fetchAllPatients = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/api/v1/patient/getallpatients");
+      const res = await axios.get(getApiUrl("/api/v1/patient/getallpatients"));
       setPatientsData(res.data);
     } catch (error) {
       console.error(error);
@@ -48,7 +49,7 @@ function Patients() {
     try {
       setLoading(true);
       const res = await axios.get(
-        `/api/v1/patient/searchforpatients?search=${debouncedQuery}`,
+        getApiUrl(`/api/v1/patient/searchforpatients?search=${debouncedQuery}`),
       );
       setPatientsData(res.data);
     } catch (error) {
@@ -60,7 +61,7 @@ function Patients() {
 
   const deletePatient = async (id) => {
     try {
-      await axios.delete(`/api/v1/patient/deletepatient/${id}`);
+      await axios.delete(getApiUrl(`/api/v1/patient/deletepatient/${id}`));
       setPatientsData((prev) => prev.filter((p) => p.id !== id));
     } catch (error) {
       console.error(error);
@@ -70,7 +71,7 @@ function Patients() {
   const editPatient = async () => {
     try {
       setLoading(true);
-      const res = await axios.patch(`/api/v1/patient/editpatient/${patientId}`, {
+      const res = await axios.patch(getApiUrl(`/api/v1/patient/editpatient/${patientId}`), {
         first_name: fname,
         last_name: lname,
         dob,
@@ -94,7 +95,7 @@ function Patients() {
   const addPatient = async () => {
     try {
       setLoading(true);
-      const res = await axios.post(`/api/v1/patient/addpatient`, {
+      const res = await axios.post(getApiUrl(`/api/v1/patient/addpatient`), {
         first_name: fname,
         last_name: lname,
         dob,

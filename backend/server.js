@@ -4,10 +4,15 @@ import { configDotenv } from "dotenv";
 configDotenv();
 const app = express();
 
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  optionsSuccessStatus: 200
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(cors());
+app.use(cors(corsOptions));
 
 const Port = process.env.PORT || 5000;
 

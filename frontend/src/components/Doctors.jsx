@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Pencil, Trash2, Plus } from "lucide-react";
+import { getApiUrl } from "../api/api";
 
 function Doctors() {
   const [search, setSearch] = useState("");
@@ -37,7 +38,7 @@ function Doctors() {
   const fetchAllDoctors = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/api/v1/doctor/getalldoctors");
+      const res = await axios.get(getApiUrl("/api/v1/doctor/getalldoctors"));
       setDoctorsData(res.data);
     } catch (error) {
       console.error(error);
@@ -50,7 +51,7 @@ function Doctors() {
     try {
       setLoading(true);
       const res = await axios.get(
-        `/api/v1/doctor/searchfordoctors?search=${debouncedQuery}`,
+        getApiUrl(`/api/v1/doctor/searchfordoctors?search=${debouncedQuery}`),
       );
       setDoctorsData(res.data);
     } catch (error) {
@@ -63,7 +64,7 @@ function Doctors() {
   const deleteDoctor = async (id) => {
     try {
       setLoading(true);
-      await axios.delete(`/api/v1/doctor/deletedoctor/${id}`);
+      await axios.delete(getApiUrl(`/api/v1/doctor/deletedoctor/${id}`));
       setDoctorsData((prev) => prev.filter((d) => d.id !== id));
     } catch (error) {
       console.error(error);
@@ -75,7 +76,7 @@ function Doctors() {
   const editDoctor = async () => {
     try {
       setLoading(true);
-      const res = await axios.patch(`/api/v1/doctor/editdoctor/${doctorId}`, {
+      const res = await axios.patch(getApiUrl(`/api/v1/doctor/editdoctor/${doctorId}`), {
         first_name: fname,
         last_name: lname,
         department,
@@ -101,7 +102,7 @@ function Doctors() {
   const addDoctor = async () => {
     try {
       setLoading(true);
-      const res = await axios.post(`/api/v1/doctor/adddoctor`, {
+      const res = await axios.post(getApiUrl(`/api/v1/doctor/adddoctor`), {
         first_name: fname,
         last_name: lname,
         department,

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { getApiUrl } from "../api/api";
 
 function Tests() {
   const [search, setSearch] = useState("");
@@ -24,7 +25,7 @@ function Tests() {
 
   const togglePaid = async (id) => {
     try {
-      await axios.patch(`/api/v1/billing/completebilling/${id}`);
+      await axios.patch(getApiUrl(`/api/v1/billing/completebilling/${id}`));
 
       setTests((prev) =>
         prev.map((t) =>
@@ -41,7 +42,7 @@ function Tests() {
   const searchForTests = async () => {
     try {
       const res = await axios.get(
-        `/api/v1/test/searchfortests?search=${debouncedQuery}`
+        getApiUrl(`/api/v1/test/searchfortests?search=${debouncedQuery}`)
       );
       setTests(res.data);
       console.log(res.data);

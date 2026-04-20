@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { getApiUrl } from "../api/api";
 
 function Appointments() {
   const [searchD, setSearchD] = useState("");
@@ -47,7 +48,7 @@ function Appointments() {
   const searchForDoctors = async () => {
     try {
       const res = await axios.get(
-        `/api/v1/doctor/searchfordoctors?search=${debouncedQueryD}`
+        getApiUrl(`/api/v1/doctor/searchfordoctors?search=${debouncedQueryD}`),
       );
       setDoctorsData(res.data);
     } catch (e) {
@@ -58,7 +59,7 @@ function Appointments() {
   const searchForPatients = async () => {
     try {
       const res = await axios.get(
-        `/api/v1/patient/searchforpatients?search=${debouncedQueryP}`
+        getApiUrl(`/api/v1/patient/searchforpatients?search=${debouncedQueryP}`),
       );
       setPatientsData(res.data);
     } catch (e) {
@@ -70,7 +71,7 @@ function Appointments() {
     try {
       setLoading(true);
       const res = await axios.get(
-        `/api/v1/appointment/searchforappointments?search=${debouncedQueryA}`
+        getApiUrl(`/api/v1/appointment/searchforappointments?search=${debouncedQueryA}`),
       );
       setAppointments(res.data);
     } catch (e) {
@@ -86,7 +87,7 @@ function Appointments() {
     try {
       setBtnLoading(true);
 
-      await axios.post("/api/v1/appointment/createappointment", {
+      await axios.post(getApiUrl("/api/v1/appointment/createappointment"), {
         doc_id: doctor.id,
         pat_id: patient.id,
         date,
@@ -106,7 +107,7 @@ function Appointments() {
 
   const deleteAppointment = async (id) => {
     try {
-      await axios.delete(`/api/v1/appointment/deleteappointment/${id}`);
+      await axios.delete(getApiUrl(`/api/v1/appointment/deleteappointment/${id}`));
       setAppointments((prev) => prev.filter((a) => a.id !== id));
     } catch (e) {
       console.error(e);
@@ -119,7 +120,7 @@ function Appointments() {
     try {
       setTestLoading(true);
 
-      await axios.post(`/api/v1/test/addtest`, {
+      await axios.post(getApiUrl(`/api/v1/test/addtest`), {
         appointment_id: selectedId,
         test_name: testName,
         test_result: testResult,
@@ -129,8 +130,8 @@ function Appointments() {
       // ✅ FIXED state update
       setAppointments((prev) =>
         prev.map((a) =>
-          a.id === selectedId ? { ...a, status: "Completed" } : a
-        )
+          a.id === selectedId ? { ...a, status: "Completed" } : a,
+        ),
       );
 
       setOpen(false);
@@ -346,7 +347,7 @@ function Appointments() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => {
-                        if(appt.status === "Completed") return;
+                        if (appt.status === "Completed") return;
                         setOpen(true);
                         setSelectedId(appt.id);
                       }}

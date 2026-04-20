@@ -8,9 +8,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: import.meta.env.VITE_API_URL,
+        target: "https://hospital-management-be4o.onrender.com/api",
         changeOrigin: true,
-        secure: true,
+        secure: false,
       }
     }
   }
