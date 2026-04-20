@@ -14,7 +14,7 @@ export const getAllBillsOfPatient =  async (req, res) => {
 
 export const completeBilling = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { id } = req.params;
         await pool.query("UPDATE billings SET status = 'Paid' WHERE id = $1", [id]);
         return res.status(200).json({ message: 'Billing completed successfully' });
     } catch (error){

@@ -4,6 +4,6 @@ import { completeBilling, getAllBillsOfPatient } from "../controllers/billingCon
 const router = Router();
 
 router.route("/getallbillsofpatient").get(getAllBillsOfPatient);
-router.route("/completebilling").patch(completeBilling);
+router.route("/completebilling/:id").patch(completeBilling);
 
 export default router;

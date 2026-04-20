@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { addTest, getAllTestsOfPatient } from "../controllers/testController.js";
+import { addTest, searchForTests } from "../controllers/testController.js";
 
 const router = Router();
 
 router.route("/addtest").post(addTest);
-router.route("/getalltestsofpatient").get(getAllTestsOfPatient);
+router.route("/searchfortests").get(searchForTests);
 
 export default router;

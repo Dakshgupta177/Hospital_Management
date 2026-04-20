@@ -1,11 +1,14 @@
 import { Router } from "express";
-import { addDoctor, getDoctors, getDoctorsByDepartment, getDoctorsByName } from "../controllers/doctorController.js";
+import { addDoctor, deleteDoctor, editDoctor, getAllDoctors, getDepartments, searchForDoctors } from "../controllers/doctorController.js";
 
 const router = Router();
 
 router.route('/adddoctor').post(addDoctor);
-router.route('/getdoctors').get(getDoctors);
-router.route('/getdoctorsbyname').get(getDoctorsByName);
-router.route('/getdoctorsbydepartment').get(getDoctorsByDepartment);
+router.route('/getalldoctors').get(getAllDoctors);
+router.route('/editdoctor/:id').patch(editDoctor);
+router.route('/deletedoctor/:id').delete(deleteDoctor);
+router.route('/searchfordoctors').get(searchForDoctors);
+router.route('/getdepartments').get(getDepartments);
+
 
 export default router;

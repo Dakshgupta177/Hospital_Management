@@ -4,7 +4,7 @@ export const createBillingsTable = async () => {
     try {
         await pool.query(`CREATE TABLE IF NOT EXISTS billings (
             id BIGSERIAL PRIMARY KEY,
-            appointment_id INT REFERENCES appointments(id),
+            appointment_id INT REFERENCES appointments(id) ON DELETE CASCADE NOT NULL ,
             amount INT NOT NULL,
             status VARCHAR(20) NOT NULL DEFAULT 'Unpaid'
         );`);
