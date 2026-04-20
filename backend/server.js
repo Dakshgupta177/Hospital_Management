@@ -9,7 +9,7 @@ const corsOptions = {
     'https://hospital-management-1-uvx8.onrender.com',
     'https://hospital-management-1-uvx8.onrender.com/'
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   credentials: true
 };
 
